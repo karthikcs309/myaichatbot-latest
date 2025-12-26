@@ -34,10 +34,10 @@ body {
     font-family: 'Inter', sans-serif;
     color: var(--text);
     /* Outer background for screens larger than 1980x1080 */
-    background: #050a14; 
+    background: #000000; 
     display: flex;
-    align-items: center; /* Center vertically on large screens */
-    justify-content: center; /* Center horizontally on large screens */
+    align-items: center; 
+    justify-content: center; 
     overflow: hidden;
 }
 
@@ -47,52 +47,55 @@ body {
     height: 100%;
     
     /* Desktop Fixed Resolution Constraints */
-    max-width: 1980px;  /* User requested 1980px */
-    max-height: 1080px; /* Standard HD Height */
+    max-width: 1980px; 
+    max-height: 1080px;
     
     display: flex;
     position: relative;
-    overflow: hidden; /* Keeps animations inside the frame */
-    background: #0f172a; /* Your original background color */
-    box-shadow: 0 0 50px rgba(0,0,0,0.5); /* Shadow to separate app from outer bg on large screens */
+    overflow: hidden; 
+    background: #0f172a; 
+    /* Shadow only appears on large screens to separate app from void */
+    box-shadow: 0 0 60px rgba(0,0,0,0.8); 
 }
 
-/* --- UNIVERSAL MOBILE SUPPORT --- */
-@media screen and (max-width: 1980px) {
+/* --- UNIVERSAL MOBILE/TABLET SUPPORT (Up to 1024px) --- */
+@media screen and (max-width: 1024px) {
     .app-frame {
         max-width: 100%;
         max-height: 100%;
-        border-radius: 0;
+        box-shadow: none; /* No shadow needed on full screen */
     }
 }
-/* -------------------------------- */
 
-/* Animated background applied to the FRAME, not the body, so it stays contained */
+/* --- ANIMATED BACKGROUND FIX --- */
+/* We make this 120% width/height so when it moves, no edges are visible */
 .app-frame::before {
     content: '';
     position: absolute;
-    width: 100%;
-    height: 100%;
+    width: 120%;  /* Increased size to prevent square edges */
+    height: 120%; /* Increased size */
+    top: -10%;    /* Center the overflow */
+    left: -10%;   /* Center the overflow */
     background: 
         radial-gradient(circle at 20% 50%, rgba(99,102,241,0.15) 0%, transparent 50%),
         radial-gradient(circle at 80% 80%, rgba(139,92,246,0.15) 0%, transparent 50%),
         radial-gradient(circle at 40% 20%, rgba(59,130,246,0.1) 0%, transparent 50%);
-    animation: bgShift 15s ease infinite;
+    animation: bgShift 15s ease-in-out infinite alternate;
     z-index: 0;
     pointer-events: none;
+    will-change: transform; /* Optimized for performance */
 }
 
 @keyframes bgShift {
-    0%, 100% { transform: translate(0, 0) scale(1); }
-    33% { transform: translate(50px, -30px) scale(1.1); }
-    66% { transform: translate(-30px, 50px) scale(0.95); }
+    0% { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(-20px, -20px) scale(1.05); }
 }
 
 /* Advanced ambient light effects */
 .ambient-light {
     position: absolute;
     border-radius: 50%;
-    filter: blur(120px);
+    filter: blur(80px); /* Reduced slightly to prevent clipping squares */
     pointer-events: none;
     z-index: 1;
     mix-blend-mode: screen;
@@ -102,25 +105,25 @@ body {
 .light-1 {
     width: 800px;
     height: 800px;
-    background: radial-gradient(circle, rgba(99,102,241,0.8) 0%, rgba(139,92,246,0.4) 40%, transparent 70%);
-    top: -300px;
-    left: -300px;
+    background: radial-gradient(circle, rgba(99,102,241,0.6) 0%, rgba(139,92,246,0.2) 50%, transparent 70%);
+    top: -200px;
+    left: -200px;
     animation: moveLight1 25s ease-in-out infinite;
 }
 
 .light-2 {
     width: 700px;
     height: 700px;
-    background: radial-gradient(circle, rgba(139,92,246,0.7) 0%, rgba(168,85,247,0.4) 40%, transparent 70%);
-    bottom: -250px;
-    right: -250px;
+    background: radial-gradient(circle, rgba(139,92,246,0.5) 0%, rgba(168,85,247,0.2) 50%, transparent 70%);
+    bottom: -150px;
+    right: -150px;
     animation: moveLight2 22s ease-in-out infinite;
 }
 
 .light-3 {
     width: 600px;
     height: 600px;
-    background: radial-gradient(circle, rgba(59,130,246,0.6) 0%, rgba(96,165,250,0.3) 40%, transparent 70%);
+    background: radial-gradient(circle, rgba(59,130,246,0.4) 0%, rgba(96,165,250,0.2) 50%, transparent 70%);
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -130,7 +133,7 @@ body {
 .light-4 {
     width: 750px;
     height: 750px;
-    background: radial-gradient(circle, rgba(168,85,247,0.6) 0%, rgba(217,70,239,0.3) 40%, transparent 70%);
+    background: radial-gradient(circle, rgba(168,85,247,0.4) 0%, rgba(217,70,239,0.2) 50%, transparent 70%);
     top: 10%;
     right: 5%;
     animation: moveLight4 30s ease-in-out infinite;
@@ -139,153 +142,49 @@ body {
 .light-5 {
     width: 650px;
     height: 650px;
-    background: radial-gradient(circle, rgba(236,72,153,0.5) 0%, rgba(219,39,119,0.3) 40%, transparent 70%);
-    bottom: 30%;
-    left: 20%;
+    background: radial-gradient(circle, rgba(236,72,153,0.3) 0%, rgba(219,39,119,0.2) 50%, transparent 70%);
+    bottom: 20%;
+    left: 10%;
     animation: moveLight5 26s ease-in-out infinite;
 }
 
 .light-6 {
     width: 550px;
     height: 550px;
-    background: radial-gradient(circle, rgba(34,211,238,0.5) 0%, rgba(6,182,212,0.3) 40%, transparent 70%);
-    top: 30%;
-    left: 15%;
+    background: radial-gradient(circle, rgba(34,211,238,0.3) 0%, rgba(6,182,212,0.2) 50%, transparent 70%);
+    top: 25%;
+    left: 10%;
     animation: moveLight6 24s ease-in-out infinite;
 }
 
 @keyframes moveLight1 {
-    0%, 100% { 
-        transform: translate(0, 0) scale(1);
-        opacity: 0.5;
-    }
-    20% { 
-        transform: translate(200px, 300px) scale(1.4);
-        opacity: 0.8;
-    }
-    40% { 
-        transform: translate(400px, 200px) scale(1.1);
-        opacity: 0.6;
-    }
-    60% { 
-        transform: translate(300px, 400px) scale(1.6);
-        opacity: 0.9;
-    }
-    80% { 
-        transform: translate(100px, 250px) scale(1.2);
-        opacity: 0.7;
-    }
+    0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.5; }
+    50% { transform: translate(100px, 150px) scale(1.1); opacity: 0.7; }
 }
 
 @keyframes moveLight2 {
-    0%, 100% { 
-        transform: translate(0, 0) scale(1);
-        opacity: 0.5;
-    }
-    25% { 
-        transform: translate(-250px, -200px) scale(1.5);
-        opacity: 0.85;
-    }
-    50% { 
-        transform: translate(-150px, -350px) scale(1.2);
-        opacity: 0.65;
-    }
-    75% { 
-        transform: translate(-300px, -150px) scale(1.3);
-        opacity: 0.75;
-    }
+    0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.5; }
+    50% { transform: translate(-100px, -100px) scale(1.2); opacity: 0.6; }
 }
 
 @keyframes moveLight3 {
-    0%, 100% { 
-        transform: translate(-50%, -50%) scale(1) rotate(0deg);
-        opacity: 0.4;
-    }
-    16% { 
-        transform: translate(-30%, -70%) scale(1.6) rotate(60deg);
-        opacity: 0.7;
-    }
-    33% { 
-        transform: translate(-80%, -30%) scale(1.3) rotate(120deg);
-        opacity: 0.6;
-    }
-    50% { 
-        transform: translate(-60%, -80%) scale(1.5) rotate(180deg);
-        opacity: 0.8;
-    }
-    66% { 
-        transform: translate(-20%, -60%) scale(1.2) rotate(240deg);
-        opacity: 0.65;
-    }
-    83% { 
-        transform: translate(-70%, -40%) scale(1.4) rotate(300deg);
-        opacity: 0.75;
-    }
+    0%, 100% { transform: translate(-50%, -50%) rotate(0deg); opacity: 0.4; }
+    50% { transform: translate(-50%, -50%) rotate(180deg) scale(1.2); opacity: 0.6; }
 }
 
 @keyframes moveLight4 {
-    0%, 100% { 
-        transform: translate(0, 0) scale(1);
-        opacity: 0.45;
-    }
-    14% { 
-        transform: translate(-200px, 150px) scale(1.4);
-        opacity: 0.75;
-    }
-    28% { 
-        transform: translate(-350px, 300px) scale(1.1);
-        opacity: 0.55;
-    }
-    42% { 
-        transform: translate(-150px, 250px) scale(1.6);
-        opacity: 0.85;
-    }
-    57% { 
-        transform: translate(-300px, 100px) scale(1.2);
-        opacity: 0.65;
-    }
-    71% { 
-        transform: translate(-100px, 350px) scale(1.5);
-        opacity: 0.8;
-    }
-    85% { 
-        transform: translate(-250px, 200px) scale(1.3);
-        opacity: 0.7;
-    }
+    0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.45; }
+    50% { transform: translate(-100px, 100px) scale(1.1); opacity: 0.6; }
 }
 
 @keyframes moveLight5 {
-    0%, 100% { 
-        transform: translate(0, 0) scale(1) rotate(0deg);
-        opacity: 0.4;
-    }
-    33% { 
-        transform: translate(250px, -200px) scale(1.5) rotate(120deg);
-        opacity: 0.7;
-    }
-    66% { 
-        transform: translate(100px, -350px) scale(1.2) rotate(240deg);
-        opacity: 0.6;
-    }
+    0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.4; }
+    50% { transform: translate(50px, -50px) scale(1.2); opacity: 0.6; }
 }
 
 @keyframes moveLight6 {
-    0%, 100% { 
-        transform: translate(0, 0) scale(1);
-        opacity: 0.4;
-    }
-    25% { 
-        transform: translate(300px, 200px) scale(1.4);
-        opacity: 0.75;
-    }
-    50% { 
-        transform: translate(150px, 350px) scale(1.1);
-        opacity: 0.55;
-    }
-    75% { 
-        transform: translate(250px, 100px) scale(1.3);
-        opacity: 0.65;
-    }
+    0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.4; }
+    50% { transform: translate(50px, 50px) scale(1.1); opacity: 0.5; }
 }
 
 /* Floating particles */
@@ -310,16 +209,10 @@ body {
 }
 
 @keyframes float {
-    0% { 
-        transform: translateY(100vh) scale(0);
-        opacity: 0;
-    }
+    0% { transform: translateY(100vh) scale(0); opacity: 0; }
     10% { opacity: 0.3; }
     90% { opacity: 0.3; }
-    100% { 
-        transform: translateY(-100px) scale(1);
-        opacity: 0;
-    }
+    100% { transform: translateY(-100px) scale(1); opacity: 0; }
 }
 
 /* Sidebar */
@@ -802,12 +695,14 @@ textarea:focus {
     transform: scale(1.1);
 }
 
-/* Mobile responsive */
-@media (max-width: 768px) {
+/* --- UNIVERSAL RESPONSIVE BREAKPOINT (1024px for iPads/Tablets) --- */
+@media (max-width: 1024px) {
     .sidebar {
         position: fixed;
         height: 100%;
         transform: translateX(-100%);
+        /* Solid background for mobile legibility */
+        background: rgba(15, 23, 42, 0.95); 
     }
     .sidebar.active { 
         transform: translateX(0);
@@ -1201,7 +1096,8 @@ async function clearChat() {
 document.addEventListener('click', (e) => {
     const sidebar = document.querySelector('.sidebar');
     const menuBtn = document.querySelector('.mobile-menu-btn');
-    if (window.innerWidth <= 768 && 
+    // Updated breakpoint to 1024 to match CSS
+    if (window.innerWidth <= 1024 && 
         sidebar.classList.contains('active') && 
         !sidebar.contains(e.target) && 
         !menuBtn.contains(e.target)) {
