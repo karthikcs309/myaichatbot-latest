@@ -33,14 +33,42 @@ body {
     height: 100vh;
     font-family: 'Inter', sans-serif;
     color: var(--text);
+    /* Outer background for screens larger than 1980x1080 */
+    background: #050a14; 
     display: flex;
+    align-items: center; /* Center vertically on large screens */
+    justify-content: center; /* Center horizontally on large screens */
     overflow: hidden;
-    background: #0f172a;
-    position: relative;
 }
 
-/* Animated background */
-body::before {
+/* --- RESOLUTION FIX CONTAINER --- */
+.app-frame {
+    width: 100%;
+    height: 100%;
+    
+    /* Desktop Fixed Resolution Constraints */
+    max-width: 1980px;  /* User requested 1980px */
+    max-height: 1080px; /* Standard HD Height */
+    
+    display: flex;
+    position: relative;
+    overflow: hidden; /* Keeps animations inside the frame */
+    background: #0f172a; /* Your original background color */
+    box-shadow: 0 0 50px rgba(0,0,0,0.5); /* Shadow to separate app from outer bg on large screens */
+}
+
+/* --- UNIVERSAL MOBILE SUPPORT --- */
+@media screen and (max-width: 1980px) {
+    .app-frame {
+        max-width: 100%;
+        max-height: 100%;
+        border-radius: 0;
+    }
+}
+/* -------------------------------- */
+
+/* Animated background applied to the FRAME, not the body, so it stays contained */
+.app-frame::before {
     content: '';
     position: absolute;
     width: 100%;
@@ -51,6 +79,7 @@ body::before {
         radial-gradient(circle at 40% 20%, rgba(59,130,246,0.1) 0%, transparent 50%);
     animation: bgShift 15s ease infinite;
     z-index: 0;
+    pointer-events: none;
 }
 
 @keyframes bgShift {
@@ -266,6 +295,7 @@ body::before {
     height: 100%;
     overflow: hidden;
     z-index: 1;
+    pointer-events: none;
 }
 
 .particle {
@@ -857,50 +887,52 @@ textarea:focus {
 
 <body>
 
-<div class="ambient-light light-1"></div>
-<div class="ambient-light light-2"></div>
-<div class="ambient-light light-3"></div>
-<div class="ambient-light light-4"></div>
-<div class="ambient-light light-5"></div>
-<div class="ambient-light light-6"></div>
+<div class="app-frame">
 
-<div class="particles" id="particles"></div>
+    <div class="ambient-light light-1"></div>
+    <div class="ambient-light light-2"></div>
+    <div class="ambient-light light-3"></div>
+    <div class="ambient-light light-4"></div>
+    <div class="ambient-light light-5"></div>
+    <div class="ambient-light light-6"></div>
 
-<button class="mobile-menu-btn" onclick="toggleSidebar()">
-<i class="fas fa-bars"></i>
-</button>
+    <div class="particles" id="particles"></div>
 
-<div class="sidebar">
-    <div class="brand">
-        <i class="fas fa-brain"></i>
-        AI Chatbot
-    </div>
-    <button class="new-chat-btn" onclick="clearChat()">
-        <i class="fas fa-plus"></i> New Chat
+    <button class="mobile-menu-btn" onclick="toggleSidebar()">
+    <i class="fas fa-bars"></i>
     </button>
-</div>
 
-<div class="main-content">
-    <div class="chat-container" id="chatBox">
-        <div class="message bot">✨ Hello! I'm your advanced AI assistant. How can I help you today?</div>
-    </div>
-
-    <div class="input-wrapper">
-        <div class="input-box">
-            <textarea id="userInput" rows="1"
-            placeholder="Ask anything..."
-            oninput="autoResize(this)"
-            onkeydown="handleKeyPress(event)">
-            </textarea>
-            <button class="send-btn" onclick="sendMessage()">
-                <i class="fas fa-paper-plane"></i>
-            </button>
+    <div class="sidebar">
+        <div class="brand">
+            <i class="fas fa-brain"></i>
+            AI Chatbot
         </div>
-        <div class="credit">Made by Karthik C S</div>
+        <button class="new-chat-btn" onclick="clearChat()">
+            <i class="fas fa-plus"></i> New Chat
+        </button>
     </div>
-</div>
 
-<script>
+    <div class="main-content">
+        <div class="chat-container" id="chatBox">
+            <div class="message bot">✨ Hello! I'm your advanced AI assistant. How can I help you today?</div>
+        </div>
+
+        <div class="input-wrapper">
+            <div class="input-box">
+                <textarea id="userInput" rows="1"
+                placeholder="Ask anything..."
+                oninput="autoResize(this)"
+                onkeydown="handleKeyPress(event)">
+                </textarea>
+                <button class="send-btn" onclick="sendMessage()">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </div>
+            <div class="credit">Made by Karthik C S</div>
+        </div>
+    </div>
+    
+</div> <script>
 const chatBox = document.getElementById('chatBox');
 const userInput = document.getElementById('userInput');
 
