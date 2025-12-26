@@ -39,147 +39,258 @@ body {
     position: relative;
 }
 
-/* Animated background */
+/* Animated background - Soft translucent */
 body::before {
     content: '';
     position: absolute;
     width: 100%;
     height: 100%;
     background: 
-        radial-gradient(circle at 20% 50%, rgba(99,102,241,0.15) 0%, transparent 50%),
-        radial-gradient(circle at 80% 80%, rgba(139,92,246,0.15) 0%, transparent 50%),
-        radial-gradient(circle at 40% 20%, rgba(59,130,246,0.1) 0%, transparent 50%);
-    animation: bgShift 15s ease infinite;
+        radial-gradient(ellipse at 20% 30%, rgba(99,102,241,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse at 80% 70%, rgba(139,92,246,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse at 50% 50%, rgba(59,130,246,0.06) 0%, transparent 55%);
+    animation: bgShift 20s ease-in-out infinite;
     z-index: 0;
+    filter: blur(60px);
 }
 
 @keyframes bgShift {
-    0%, 100% { transform: translate(0, 0) scale(1); }
-    33% { transform: translate(50px, -30px) scale(1.1); }
-    66% { transform: translate(-30px, 50px) scale(0.95); }
+    0%, 100% { 
+        transform: translate(0, 0) scale(1);
+        opacity: 0.6;
+    }
+    33% { 
+        transform: translate(30px, -20px) scale(1.05);
+        opacity: 0.8;
+    }
+    66% { 
+        transform: translate(-20px, 30px) scale(0.98);
+        opacity: 0.7;
+    }
 }
 
-/* Advanced ambient light effects */
+/* Advanced ambient light effects - Soft translucent diffusion */
 .ambient-light {
     position: absolute;
     border-radius: 50%;
-    filter: blur(80px);
-    opacity: 0.4;
+    filter: blur(200px);
     pointer-events: none;
     z-index: 1;
-    mix-blend-mode: screen;
+    mix-blend-mode: soft-light;
+    will-change: transform, opacity;
+    opacity: 0.3;
 }
 
 .light-1 {
-    width: 600px;
-    height: 600px;
-    background: radial-gradient(circle, rgba(99,102,241,0.6) 0%, transparent 70%);
-    top: -200px;
-    left: -200px;
-    animation: moveLight1 20s ease-in-out infinite;
+    width: 1200px;
+    height: 1200px;
+    background: radial-gradient(ellipse at center, 
+        rgba(99,102,241,0.4) 0%, 
+        rgba(139,92,246,0.2) 30%, 
+        rgba(99,102,241,0.1) 50%,
+        transparent 70%);
+    top: -400px;
+    left: -400px;
+    animation: moveLight1 35s ease-in-out infinite;
 }
 
 .light-2 {
-    width: 500px;
-    height: 500px;
-    background: radial-gradient(circle, rgba(139,92,246,0.5) 0%, transparent 70%);
-    bottom: -150px;
-    right: -150px;
-    animation: moveLight2 18s ease-in-out infinite;
+    width: 1100px;
+    height: 1100px;
+    background: radial-gradient(ellipse at center, 
+        rgba(139,92,246,0.35) 0%, 
+        rgba(168,85,247,0.18) 30%, 
+        rgba(139,92,246,0.08) 50%,
+        transparent 70%);
+    bottom: -350px;
+    right: -350px;
+    animation: moveLight2 32s ease-in-out infinite;
 }
 
 .light-3 {
-    width: 450px;
-    height: 450px;
-    background: radial-gradient(circle, rgba(59,130,246,0.4) 0%, transparent 70%);
+    width: 1000px;
+    height: 1000px;
+    background: radial-gradient(ellipse at center, 
+        rgba(59,130,246,0.3) 0%, 
+        rgba(96,165,250,0.15) 30%,
+        rgba(59,130,246,0.08) 50%, 
+        transparent 70%);
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    animation: moveLight3 22s ease-in-out infinite;
+    animation: moveLight3 38s ease-in-out infinite;
 }
 
 .light-4 {
-    width: 550px;
-    height: 550px;
-    background: radial-gradient(circle, rgba(168,85,247,0.35) 0%, transparent 70%);
-    top: 20%;
-    right: 10%;
-    animation: moveLight4 25s ease-in-out infinite;
+    width: 1300px;
+    height: 1300px;
+    background: radial-gradient(ellipse at center, 
+        rgba(168,85,247,0.28) 0%, 
+        rgba(217,70,239,0.14) 30%,
+        rgba(168,85,247,0.07) 50%, 
+        transparent 70%);
+    top: 10%;
+    right: 5%;
+    animation: moveLight4 40s ease-in-out infinite;
+}
+
+.light-5 {
+    width: 1150px;
+    height: 1150px;
+    background: radial-gradient(ellipse at center, 
+        rgba(236,72,153,0.25) 0%, 
+        rgba(219,39,119,0.13) 30%,
+        rgba(236,72,153,0.06) 50%, 
+        transparent 70%);
+    bottom: 30%;
+    left: 20%;
+    animation: moveLight5 36s ease-in-out infinite;
+}
+
+.light-6 {
+    width: 950px;
+    height: 950px;
+    background: radial-gradient(ellipse at center, 
+        rgba(34,211,238,0.25) 0%, 
+        rgba(6,182,212,0.13) 30%,
+        rgba(34,211,238,0.06) 50%, 
+        transparent 70%);
+    top: 30%;
+    left: 15%;
+    animation: moveLight6 34s ease-in-out infinite;
 }
 
 @keyframes moveLight1 {
     0%, 100% { 
         transform: translate(0, 0) scale(1);
-        opacity: 0.4;
+        opacity: 0.25;
     }
-    25% { 
-        transform: translate(100px, 150px) scale(1.2);
-        opacity: 0.6;
+    20% { 
+        transform: translate(150px, 200px) scale(1.15);
+        opacity: 0.35;
     }
-    50% { 
-        transform: translate(200px, 100px) scale(0.9);
+    40% { 
+        transform: translate(280px, 140px) scale(1.08);
         opacity: 0.3;
     }
-    75% { 
-        transform: translate(50px, 200px) scale(1.1);
-        opacity: 0.5;
+    60% { 
+        transform: translate(200px, 280px) scale(1.2);
+        opacity: 0.4;
+    }
+    80% { 
+        transform: translate(80px, 180px) scale(1.1);
+        opacity: 0.32;
     }
 }
 
 @keyframes moveLight2 {
     0%, 100% { 
         transform: translate(0, 0) scale(1);
-        opacity: 0.4;
+        opacity: 0.25;
     }
-    33% { 
-        transform: translate(-150px, -100px) scale(1.3);
-        opacity: 0.6;
+    25% { 
+        transform: translate(-180px, -150px) scale(1.18);
+        opacity: 0.38;
     }
-    66% { 
-        transform: translate(-80px, -180px) scale(0.8);
-        opacity: 0.35;
+    50% { 
+        transform: translate(-120px, -250px) scale(1.1);
+        opacity: 0.3;
+    }
+    75% { 
+        transform: translate(-220px, -120px) scale(1.14);
+        opacity: 0.34;
     }
 }
 
 @keyframes moveLight3 {
     0%, 100% { 
         transform: translate(-50%, -50%) scale(1) rotate(0deg);
-        opacity: 0.3;
+        opacity: 0.22;
     }
-    25% { 
-        transform: translate(-30%, -60%) scale(1.4) rotate(90deg);
-        opacity: 0.5;
+    16% { 
+        transform: translate(-45%, -60%) scale(1.2) rotate(45deg);
+        opacity: 0.32;
+    }
+    33% { 
+        transform: translate(-65%, -45%) scale(1.12) rotate(90deg);
+        opacity: 0.28;
     }
     50% { 
-        transform: translate(-70%, -40%) scale(0.9) rotate(180deg);
-        opacity: 0.4;
+        transform: translate(-55%, -65%) scale(1.18) rotate(135deg);
+        opacity: 0.35;
     }
-    75% { 
-        transform: translate(-40%, -70%) scale(1.2) rotate(270deg);
-        opacity: 0.45;
+    66% { 
+        transform: translate(-42%, -55%) scale(1.1) rotate(180deg);
+        opacity: 0.3;
+    }
+    83% { 
+        transform: translate(-60%, -48%) scale(1.15) rotate(225deg);
+        opacity: 0.33;
     }
 }
 
 @keyframes moveLight4 {
     0%, 100% { 
         transform: translate(0, 0) scale(1);
-        opacity: 0.35;
+        opacity: 0.23;
     }
-    20% { 
-        transform: translate(-120px, 80px) scale(1.15);
-        opacity: 0.5;
+    14% { 
+        transform: translate(-160px, 120px) scale(1.16);
+        opacity: 0.33;
     }
-    40% { 
-        transform: translate(-200px, 160px) scale(0.85);
+    28% { 
+        transform: translate(-260px, 220px) scale(1.08);
+        opacity: 0.28;
+    }
+    42% { 
+        transform: translate(-130px, 190px) scale(1.22);
+        opacity: 0.37;
+    }
+    57% { 
+        transform: translate(-240px, 90px) scale(1.12);
         opacity: 0.3;
     }
-    60% { 
-        transform: translate(-80px, 120px) scale(1.25);
-        opacity: 0.55;
+    71% { 
+        transform: translate(-100px, 250px) scale(1.18);
+        opacity: 0.35;
     }
-    80% { 
-        transform: translate(-150px, 40px) scale(0.95);
-        opacity: 0.4;
+    85% { 
+        transform: translate(-200px, 160px) scale(1.14);
+        opacity: 0.32;
+    }
+}
+
+@keyframes moveLight5 {
+    0%, 100% { 
+        transform: translate(0, 0) scale(1) rotate(0deg);
+        opacity: 0.22;
+    }
+    33% { 
+        transform: translate(190px, -160px) scale(1.17) rotate(90deg);
+        opacity: 0.32;
+    }
+    66% { 
+        transform: translate(90px, -260px) scale(1.1) rotate(180deg);
+        opacity: 0.28;
+    }
+}
+
+@keyframes moveLight6 {
+    0%, 100% { 
+        transform: translate(0, 0) scale(1);
+        opacity: 0.22;
+    }
+    25% { 
+        transform: translate(220px, 160px) scale(1.15);
+        opacity: 0.33;
+    }
+    50% { 
+        transform: translate(130px, 260px) scale(1.08);
+        opacity: 0.27;
+    }
+    75% { 
+        transform: translate(200px, 90px) scale(1.13);
+        opacity: 0.3;
     }
 }
 
@@ -190,6 +301,7 @@ body::before {
     height: 100%;
     overflow: hidden;
     z-index: 1;
+    pointer-events: none;
 }
 
 .particle {
@@ -255,6 +367,7 @@ body::before {
     background: linear-gradient(135deg, #fff 0%, #818cf8 50%, #6366f1 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    background-clip: text;
     display: flex;
     align-items: center;
     gap: 12px;
@@ -265,6 +378,7 @@ body::before {
     background: linear-gradient(135deg, var(--accent), var(--accent-light));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    background-clip: text;
     animation: rotate 4s linear infinite;
 }
 
@@ -336,7 +450,7 @@ body::before {
     display: flex;
     flex-direction: column;
     gap: 24px;
-    padding-bottom: 160px;
+    padding-bottom: 180px;
     scroll-behavior: smooth;
 }
 
@@ -362,6 +476,70 @@ body::before {
     line-height: 1.7;
     animation: msgSlideIn 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     position: relative;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.message-actions {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    display: flex;
+    gap: 6px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.message:hover .message-actions {
+    opacity: 1;
+}
+
+.action-btn {
+    background: rgba(0,0,0,0.4);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.1);
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85rem;
+    transition: all 0.2s ease;
+}
+
+.action-btn:hover {
+    background: rgba(0,0,0,0.6);
+    border-color: var(--accent-light);
+    transform: scale(1.1);
+}
+
+.action-btn:active {
+    transform: scale(0.95);
+}
+
+.copied-tooltip {
+    position: absolute;
+    top: -35px;
+    right: 0;
+    background: var(--accent);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    animation: tooltipFade 2s ease forwards;
+    pointer-events: none;
+    z-index: 100;
+}
+
+@keyframes tooltipFade {
+    0% { opacity: 0; transform: translateY(5px); }
+    10% { opacity: 1; transform: translateY(0); }
+    90% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(-5px); }
 }
 
 @keyframes msgSlideIn {
@@ -446,6 +624,7 @@ body::before {
     width: 90%;
     max-width: 900px;
     animation: inputFloat 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: 10;
 }
 
 @keyframes inputFloat {
@@ -511,6 +690,12 @@ textarea:focus {
     box-shadow: 0 4px 16px var(--shadow);
     position: relative;
     overflow: hidden;
+    flex-shrink: 0;
+}
+
+.send-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 
 .send-btn::before {
@@ -522,16 +707,16 @@ textarea:focus {
     transition: transform 0.6s;
 }
 
-.send-btn:hover::before {
+.send-btn:hover:not(:disabled)::before {
     transform: translateX(100%);
 }
 
-.send-btn:hover {
+.send-btn:hover:not(:disabled) {
     transform: scale(1.1) rotate(5deg);
     box-shadow: 0 8px 32px var(--shadow);
 }
 
-.send-btn:active {
+.send-btn:active:not(:disabled) {
     transform: scale(0.95) rotate(0deg);
 }
 
@@ -595,15 +780,150 @@ textarea:focus {
         position: fixed;
         height: 100%;
         transform: translateX(-100%);
+        width: 260px;
     }
     .sidebar.active { 
         transform: translateX(0);
         box-shadow: 8px 0 32px rgba(0,0,0,0.5);
     }
-    .mobile-menu-btn { display: flex; align-items: center; justify-content: center; }
-    .chat-container { padding: 20px; padding-top: 80px; }
-    .message { max-width: 90%; }
-    .input-wrapper { width: 95%; bottom: 16px; }
+    .mobile-menu-btn { 
+        display: flex; 
+        align-items: center; 
+        justify-content: center;
+        width: 48px;
+        height: 48px;
+    }
+    .chat-container { 
+        padding: 20px 16px; 
+        padding-top: 90px;
+        padding-bottom: 200px;
+    }
+    .message { 
+        max-width: 92%;
+        font-size: 0.9rem;
+        padding: 14px 18px;
+    }
+    .input-wrapper { 
+        width: calc(100% - 16px);
+        bottom: 12px;
+        left: 8px;
+        transform: none;
+    }
+    .input-box {
+        padding: 10px 16px;
+    }
+    .send-btn {
+        width: 44px;
+        height: 44px;
+    }
+    textarea {
+        font-size: 0.95rem;
+    }
+    .brand {
+        font-size: 1.5rem;
+    }
+    .new-chat-btn {
+        padding: 12px 18px;
+        font-size: 0.9rem;
+    }
+    
+    /* Optimize ambient lights for mobile */
+    .ambient-light {
+        filter: blur(150px);
+    }
+    .light-1 { width: 800px; height: 800px; }
+    .light-2 { width: 700px; height: 700px; }
+    .light-3 { width: 650px; height: 650px; }
+    .light-4 { width: 750px; height: 750px; }
+    .light-5 { width: 600px; height: 600px; }
+    .light-6 { width: 550px; height: 550px; }
+}
+
+/* Small mobile devices */
+@media (max-width: 480px) {
+    .sidebar {
+        width: 240px;
+    }
+    .chat-container {
+        padding: 16px 12px;
+        padding-top: 85px;
+        padding-bottom: 210px;
+    }
+    .message {
+        max-width: 95%;
+        font-size: 0.88rem;
+        padding: 12px 16px;
+    }
+    .mobile-menu-btn {
+        width: 44px;
+        height: 44px;
+        top: 16px;
+        left: 16px;
+    }
+    .input-wrapper {
+        bottom: 10px;
+    }
+    .input-box {
+        padding: 8px 14px;
+        border-radius: 20px;
+    }
+    .send-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+    textarea {
+        font-size: 0.9rem;
+        max-height: 120px;
+    }
+    .brand {
+        font-size: 1.4rem;
+    }
+    .credit {
+        font-size: 0.75rem;
+        margin-top: 8px;
+    }
+    
+    /* Further optimize ambient lights */
+    .ambient-light {
+        filter: blur(120px);
+        opacity: 0.25;
+    }
+    .light-1 { width: 600px; height: 600px; }
+    .light-2 { width: 550px; height: 550px; }
+    .light-3 { width: 500px; height: 500px; }
+    .light-4 { width: 550px; height: 550px; }
+    .light-5 { width: 480px; height: 480px; }
+    .light-6 { width: 450px; height: 450px; }
+}
+
+/* Large mobile devices / small tablets */
+@media (min-width: 481px) and (max-width: 768px) {
+    .chat-container {
+        padding: 24px 20px;
+        padding-top: 95px;
+        padding-bottom: 220px;
+    }
+    .message {
+        font-size: 0.92rem;
+    }
+}
+
+/* Tablets */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .sidebar {
+        width: 260px;
+    }
+    .chat-container {
+        padding: 32px;
+        padding-bottom: 180px;
+    }
+    .message {
+        max-width: 80%;
+    }
+    .input-wrapper {
+        width: 92%;
+    }
 }
 
 /* Code blocks in messages */
@@ -622,6 +942,11 @@ textarea:focus {
     font-size: 0.9em;
 }
 
+.message pre code {
+    background: transparent;
+    padding: 0;
+}
+
 .message a {
     color: var(--accent-light);
     text-decoration: none;
@@ -632,6 +957,15 @@ textarea:focus {
 .message a:hover {
     color: white;
     border-bottom-color: white;
+}
+
+.message ul, .message ol {
+    margin: 8px 0;
+    padding-left: 24px;
+}
+
+.message li {
+    margin: 4px 0;
 }
 
 /* Credit */
@@ -664,6 +998,12 @@ textarea:focus {
     0%, 100% { background-position: 200% 0; }
     50% { background-position: -200% 0; }
 }
+
+/* Error message */
+.error-message {
+    background: rgba(239, 68, 68, 0.2);
+    border: 1px solid rgba(239, 68, 68, 0.5);
+}
 </style>
 </head>
 
@@ -673,11 +1013,13 @@ textarea:focus {
 <div class="ambient-light light-2"></div>
 <div class="ambient-light light-3"></div>
 <div class="ambient-light light-4"></div>
+<div class="ambient-light light-5"></div>
+<div class="ambient-light light-6"></div>
 
 <div class="particles" id="particles"></div>
 
 <button class="mobile-menu-btn" onclick="toggleSidebar()">
-<i class="fas fa-bars"></i>
+    <i class="fas fa-bars"></i>
 </button>
 
 <div class="sidebar">
@@ -700,9 +1042,8 @@ textarea:focus {
             <textarea id="userInput" rows="1"
             placeholder="Ask anything..."
             oninput="autoResize(this)"
-            onkeydown="handleKeyPress(event)">
-            </textarea>
-            <button class="send-btn" onclick="sendMessage()">
+            onkeydown="handleKeyPress(event)"></textarea>
+            <button class="send-btn" id="sendBtn" onclick="sendMessage()">
                 <i class="fas fa-paper-plane"></i>
             </button>
         </div>
@@ -713,6 +1054,8 @@ textarea:focus {
 <script>
 const chatBox = document.getElementById('chatBox');
 const userInput = document.getElementById('userInput');
+const sendBtn = document.getElementById('sendBtn');
+let conversationHistory = [];
 
 // Create floating particles
 function createParticles() {
@@ -745,12 +1088,101 @@ function handleKeyPress(event) {
     }
 }
 
+function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
 function appendMessage(text, sender) {
     const div = document.createElement('div');
     div.className = `message ${sender}`;
-    div.innerHTML = marked.parse(text);
+    
+    // Parse markdown
+    const parsed = marked.parse(text);
+    
+    // Create message content
+    const contentDiv = document.createElement('div');
+    contentDiv.innerHTML = parsed;
+    
+    // Add copy button for bot messages
+    if (sender === 'bot') {
+        const actionsDiv = document.createElement('div');
+        actionsDiv.className = 'message-actions';
+        actionsDiv.innerHTML = `
+            <button class="action-btn" onclick="copyMessage(this)" title="Copy message">
+                <i class="fas fa-copy"></i>
+            </button>
+        `;
+        div.appendChild(actionsDiv);
+    }
+    
+    div.appendChild(contentDiv);
     chatBox.appendChild(div);
     chatBox.scrollTop = chatBox.scrollHeight;
+}
+
+function copyMessage(btn) {
+    const message = btn.closest('.message');
+    const messageActions = message.querySelector('.message-actions');
+    
+    // Get text content, excluding the action buttons
+    let textContent = '';
+    Array.from(message.childNodes).forEach(node => {
+        if (node !== messageActions && node.nodeType === Node.ELEMENT_NODE) {
+            textContent += node.innerText || node.textContent || '';
+        }
+    });
+    
+    textContent = textContent.trim();
+    
+    // Copy to clipboard
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(textContent).then(() => {
+            showCopyFeedback(btn);
+        }).catch(err => {
+            fallbackCopy(textContent);
+            showCopyFeedback(btn);
+        });
+    } else {
+        fallbackCopy(textContent);
+        showCopyFeedback(btn);
+    }
+}
+
+function fallbackCopy(text) {
+    const textArea = document.createElement('textarea');
+    textArea.value = text;
+    textArea.style.position = 'fixed';
+    textArea.style.left = '-999999px';
+    textArea.style.top = '-999999px';
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    try {
+        document.execCommand('copy');
+    } catch (err) {
+        console.error('Fallback copy failed:', err);
+    }
+    document.body.removeChild(textArea);
+}
+
+function showCopyFeedback(btn) {
+    // Show tooltip
+    const tooltip = document.createElement('div');
+    tooltip.className = 'copied-tooltip';
+    tooltip.textContent = 'Copied!';
+    btn.style.position = 'relative';
+    btn.appendChild(tooltip);
+    setTimeout(() => tooltip.remove(), 2000);
+    
+    // Change icon briefly
+    const icon = btn.querySelector('i');
+    const originalClass = icon.className;
+    icon.className = 'fas fa-check';
+    setTimeout(() => {
+        icon.className = originalClass;
+    }, 2000);
 }
 
 function appendLoading() {
@@ -768,34 +1200,79 @@ async function sendMessage() {
     const text = userInput.value.trim();
     if (!text) return;
     
+    // Disable send button
+    sendBtn.disabled = true;
+    
     appendMessage(text, 'user');
+    conversationHistory.push({role: 'user', content: text});
+    
     userInput.value = '';
     userInput.style.height = 'auto';
 
     const loader = appendLoading();
     
     try {
-        const res = await fetch('/chat', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ message: text })
+        // Call Claude API
+        const response = await fetch("https://api.anthropic.com/v1/messages", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                model: "claude-sonnet-4-20250514",
+                max_tokens: 1000,
+                messages: conversationHistory
+            })
         });
-        const data = await res.json();
-        document.getElementById(loader).remove();
-        appendMessage(data.response, 'bot');
+        
+        if (!response.ok) {
+            throw new Error(`API Error: ${response.status}`);
+        }
+        
+        const data = await response.json();
+        const loaderElement = document.getElementById(loader);
+        if (loaderElement) {
+            loaderElement.remove();
+        }
+        
+        // Extract text from response
+        let responseText = '';
+        if (data.content && Array.isArray(data.content)) {
+            responseText = data.content
+                .filter(item => item.type === 'text')
+                .map(item => item.text)
+                .join('\n\n');
+        }
+        
+        if (responseText) {
+            appendMessage(responseText, 'bot');
+            conversationHistory.push({role: 'assistant', content: responseText});
+        } else {
+            appendMessage('I apologize, but I couldn\'t generate a response. Please try again.', 'bot');
+        }
+        
     } catch (error) {
-        document.getElementById(loader).remove();
-        appendMessage('⚠️ Connection error. Please try again.', 'bot');
+        console.error('Error:', error);
+        const loaderElement = document.getElementById(loader);
+        if (loaderElement) {
+            loaderElement.remove();
+        }
+        const errorMsg = document.createElement('div');
+        errorMsg.className = 'message bot error-message';
+        errorMsg.textContent = '⚠️ Connection error. Please check your internet connection and try again.';
+        chatBox.appendChild(errorMsg);
+        chatBox.scrollTop = chatBox.scrollHeight;
+    } finally {
+        sendBtn.disabled = false;
+        userInput.focus();
     }
 }
 
-async function clearChat() {
-    try {
-        await fetch('/clear', { method: 'POST' });
-        chatBox.innerHTML = '<div class="message bot">✨ Chat cleared. Ready for a fresh start!</div>';
-    } catch (error) {
-        console.error('Clear chat error:', error);
-    }
+function clearChat() {
+    conversationHistory = [];
+    chatBox.innerHTML = '<div class="message bot">✨ Chat cleared. Ready for a fresh start!</div>';
+    userInput.value = '';
+    userInput.style.height = 'auto';
 }
 
 // Close sidebar on outside click (mobile)
@@ -809,7 +1286,8 @@ document.addEventListener('click', (e) => {
         sidebar.classList.remove('active');
     }
 });
-</script>
 
-</body>
-</html>
+// Focus input on load
+window.addEventListener('load', () => {
+    userInput.focus();
+});
